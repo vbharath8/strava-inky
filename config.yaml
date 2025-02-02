@@ -1,0 +1,29 @@
+athlete_id: 22039143
+
+urls:
+  activities: "https://www.strava.com/api/v3/athlete/activities"
+  individual_activity: "https://www.strava.com/api/v3/activities"
+  athlete_stats: "https://www.strava.com/api/v3/athletes"
+
+
+icons:
+  running_progress_shoe: "./input_images/running_progress_shoe.png"  #https://www.flaticon.com/
+  cycling_progress_bike: "./input_images/cycling_progress_bike.png"
+  zigzag: "./input_images/zigzag.png"
+  calendar: "./input_images/calendar.png"
+  location: "./input_images/location.png"
+  goal: "./input_images/goal.png"
+
+goals:
+  yearly_running_distance: 1400  #In km
+  yearly_cycling_hours: 180  #In Hours
+
+bold_font_path_linux: "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+regular_font_path_linux: "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf"
+
+bold_font_path_windows: "./fonts/DejaVuSans-Bold.ttf"
+regular_font_path_windows: "./fonts/LiberationSans-Bold.ttf"
+
+input_data: "./input_data.xlsx"
+
+race_image_path: "./input_images/race_calendar"

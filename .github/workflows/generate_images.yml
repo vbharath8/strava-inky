@@ -1,0 +1,46 @@
+name: Generate Summary and Race Calendars
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # Runs daily at 6 AM UTC
+  workflow_dispatch:  # Allows manual runs
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout latest code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install pandas requests matplotlib pillow pyyaml openpyxl
+
+      - name: Create output directory
+        run: mkdir -p output
+
+      - name: Run Python Script
+        env:
+          STRAVA_CLIENT_ID: ${{ secrets.STRAVA_CLIENT_ID }}
+          STRAVA_CLIENT_SECRET: ${{ secrets.STRAVA_CLIENT_SECRET }}
+          STRAVA_REFRESH_TOKEN: ${{ secrets.STRAVA_REFRESH_TOKEN }}
+        run: python summary_screen.py
+
+      # GitHub Atrifacts
+      - name: Upload Generated Images
+        uses: actions/upload-artifact@v4
+        with:
+          name: summary-images
+          path: output/
+
+      # Public Storage (GitHub Pages)
+      - name: Deploy Images to GitHub Pages (Public)
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: output/  # Uploads all images to GitHub Pages
